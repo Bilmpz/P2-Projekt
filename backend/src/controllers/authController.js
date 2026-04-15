@@ -28,7 +28,7 @@ const registerUser = async (req, res) => {
 }                                                       
 
 
-const LoginUser = async (req, res) => {             
+const loginUser = async (req, res) => {             
     try{
         const {email, password} = req.body
 
@@ -54,4 +54,4 @@ const LoginUser = async (req, res) => {
 }                                                          
 
 
-export { registerUser, LoginUser }
+export { registerUser, loginUser }

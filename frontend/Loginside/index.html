@@ -31,7 +31,7 @@
 
         <div class="login-mini-card">
           <h2>Studieliv samlet ét sted</h2>
-          <p>TEKST TESKT TEKST </p>
+          <p>TEKST TESKT TEKST</p>
         </div>
       </div>
 
@@ -42,19 +42,19 @@
         </div>
 
         <form class="stack">
-          <div class="field" id="usernameField" style="display:none;">
+          <div class="field" id="usernameField">
             <label for="username">Brugernavn</label>
-            <input id="username" type="text" placeholder="Dit brugernavn">
+            <input id="usernameInput" type="text" placeholder="Dit brugernavn">
           </div>
 
           <div class="field">
             <label for="email">AAU e-mail</label>
-            <input id="email" type="email" placeholder="navn@student.aau.dk">
+            <input id="emailInput" type="email" placeholder="navn@student.aau.dk">
           </div>
 
           <div class="field">
             <label for="password">Adgangskode</label>
-            <input id="password" type="password" placeholder="Skriv din adgangskode">
+            <input id="passwordInput" type="password" placeholder="Skriv din adgangskode">
           </div>
 
           <div class="login-actions">
@@ -67,8 +67,8 @@
 
           <p id="error" style="display:none; color:red;"></p>
 
-          <button id="authBtn" onclick="login()">Log ind</button>
-          <button id="registerBtn" onclick="register()">Opret bruger</button>
+          <button id="authBtn" type="button" onclick="login()">Log ind</button>
+          <button id="registerBtn" type="button" onclick="register()">Opret bruger</button>
           <a class="secondary-btn" href="../main/main.html">Fortsæt som demo</a>
         </form>
 
@@ -77,7 +77,40 @@
     </section>
   </main>
 
-    <script src="index.js"></script>
+  <script src="index.js"></script>
+  <script>
+    const username = document.getElementById('usernameInput')
+    const email = document.getElementById('emailInput')
+    const password = document.getElementById('passwordInput')
+    const error = document.getElementById('error')
+
+    async function register() {
+      const usernameVal = username.value
+      const emailVal = email.value
+      const passVal = password.value
+
+      if (!emailVal || !passVal || !usernameVal) return
+
+      try {
+        const response = await fetch('http://localhost:3000/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: emailVal, password: passVal, username: usernameVal })
+        })
+        const data = await response.json()
+
+        if (response.ok) {
+          alert('Bruger oprettet! Log ind nu.')
+        } else {
+          error.innerText = data.message
+          error.style.display = 'block'
+        }
+      } catch (err) {
+        error.innerText = err.message
+        error.style.display = 'block'
+      }
+    }
+  </script>
 
 </body>
 </html>
