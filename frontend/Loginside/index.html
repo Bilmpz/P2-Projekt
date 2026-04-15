@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AAU Study Buddy – Loginside</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="login-page">
+    <section class="login-shell">
+      <div class="login-brand-panel">
+        <div class="brand">
+          <span class="brand-mark">A</span>
+          <span>
+            Study Buddy
+            <small>AAU</small>
+          </span> 
+        </div>
+
+        <div>
+          <h1>Velkommen tilbage</h1>
+          <p>Log ind og få adgang til dit feed, dine grupper og booking af grupperum.</p>
+        </div>
+
+        <ul class="login-points">
+          <li><span>✓</span><span>Se opslag fra dine fag og studiegrupper</span></li>
+          <li><span>✓</span><span>Find study buddies til kurser og projekter</span></li>
+          <li><span>✓</span><span>Book grupperum til læsesessioner</span></li>
+        </ul>
+
+        <div class="login-mini-card">
+          <h2>Studieliv samlet ét sted</h2>
+          <p>TEKST TESKT TEKST </p>
+        </div>
+      </div>
+
+      <div class="login-form-panel">
+        <div class="page-head" style="margin-bottom: 0;">
+          <h2>Log ind</h2>
+          <p>Brug din AAU-mail for at fortsætte.</p>
+        </div>
+
+        <form class="stack">
+          <div class="field" id="usernameField" style="display:none;">
+            <label for="username">Brugernavn</label>
+            <input id="username" type="text" placeholder="Dit brugernavn">
+          </div>
+
+          <div class="field">
+            <label for="email">AAU e-mail</label>
+            <input id="email" type="email" placeholder="navn@student.aau.dk">
+          </div>
+
+          <div class="field">
+            <label for="password">Adgangskode</label>
+            <input id="password" type="password" placeholder="Skriv din adgangskode">
+          </div>
+
+          <div class="login-actions">
+            <label class="checkbox-row" for="remember-me">
+              <input id="remember-me" type="checkbox">
+              <span>Husk mig</span>
+            </label>
+            <a class="muted-link" href="#">Glemt kodeord?</a>
+          </div>
+
+          <p id="error" style="display:none; color:red;"></p>
+
+          <button id="authBtn" onclick="login()">Log ind</button>
+          <button id="registerBtn" onclick="register()">Opret bruger</button>
+          <a class="secondary-btn" href="../main/main.html">Fortsæt som demo</a>
+        </form>
+
+        <p class="login-footer-text">Har du ikke en bruger endnu? Kontakt din administrator eller brug demo-visningen.</p>
+      </div>
+    </section>
+  </main>
+
+    <script src="index.js"></script>
+
+</body>
+</html>
