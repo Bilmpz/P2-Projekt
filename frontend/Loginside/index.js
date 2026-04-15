@@ -25,3 +25,39 @@ async function login() {
     error.style.display = 'block'
   }
 }
+
+async function register() {
+  const username = document.getElementById('usernameInput')
+  const email = document.getElementById('emailInput')
+  const password = document.getElementById('passwordInput')
+  const error = document.getElementById('error')
+
+  async function register() {
+
+    const usernameVal = username.value
+    const emailVal = email.value
+    const passVal = password.value
+
+    if (!emailVal || !passVal || !usernameVal) return
+
+    try {
+      const response = await fetch('http://localhost:3000/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailVal, password: passVal, username: usernameVal })
+      })
+      
+      const data = await response.json()
+      
+      if (response.ok) {
+        alert('Bruger oprettet! Log ind nu.')
+      } else {
+        error.innerText = data.message
+        error.style.display = 'block'
+      }
+    } catch (err) {
+      error.innerText = err.message
+      error.style.display = 'block'
+    }
+  }
+}

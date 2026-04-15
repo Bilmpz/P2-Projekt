@@ -7,9 +7,9 @@ import { fileURLToPath } from 'url'
 
 const app = express()
 
-app.use(express.json())                           
-app.use("/auth", authRoutes)                       
 app.use(cors({ origin: 'http://127.0.0.1:5500' }))
+app.use(express.json())
+app.use("/auth", authRoutes)
 
 
 
@@ -29,7 +29,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, '../../frontend')))
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'Loginside/index.html'))
+    res.sendFile(path.join(__dirname, '../../frontend/Loginside/index.html'))
 })
 
 

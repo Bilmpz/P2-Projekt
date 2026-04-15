@@ -27,7 +27,7 @@ const userSchema = new Schema(
       unique: true,
       lowercase: true,
       trim: true,
-      match: /^\w+([.-]?\w+)*@[\w.-]*aau\.dk$/,
+      match: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
     }
 
   },
