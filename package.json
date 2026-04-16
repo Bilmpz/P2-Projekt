@@ -14,7 +14,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon backend/src/server.js"
+    "dev": "nodemon backend/src/server.js",
+    "seed": "node seed.js"
   },
   "repository": {
     "type": "git",

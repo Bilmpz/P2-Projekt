@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import app from "./app.js";
+//import { seedGroups } from "../seed.js";
 
 dotenv.config({
     path: './.env'
@@ -25,3 +26,4 @@ const startServer = async () => {
 }
 
 startServer()
+//seedGroups()
