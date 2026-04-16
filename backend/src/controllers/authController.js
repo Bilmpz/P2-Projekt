@@ -20,8 +20,8 @@ const registerUser = async (req, res) => {
             email: email.toLowerCase(),
             password,
         })
-        return res.status(201).json({ message: "Bruger oprettet" })   // ← tilføjet
         console.log(user)
+        return res.status(201).json({ message: "Bruger oprettet" })   // ← tilføjet
     } catch (error) {
         res.status(500).json({ message: "Internal server error", error: error.message})
     }    
