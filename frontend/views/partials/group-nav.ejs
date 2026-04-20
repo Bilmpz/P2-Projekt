@@ -1,0 +1,7 @@
+        <section class="grouped-section">
+          
+          <h2 class="sidebar-title">Mine grupper (3)</h2>
+          <% groups.forEach(group => { %>
+          <a class="group-link " href="/groups/:id"><%= group.name %> <span><%= group.description%></span></a>
+          <% }) %>
+        </section>

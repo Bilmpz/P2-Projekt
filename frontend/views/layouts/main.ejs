@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AAU Study Buddy – Feed</title>
+  <link rel="stylesheet" href="/css/mainstyles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+  <a class="brand" href="main.html">
+          <span class="brand-mark">A</span>
+          <span>
+            AAU Study Buddy
+          </span>
+        </a>
+        <div class="header-actions">
+          <a class="icon-btn" href="../all-groups/all-groups.html">Søg</a>
+          <a class="primary-btn" href="../class-group/class-group.html">＋ Nyt opslag</a>
+          <a class="icon-btn" href="../post-detail/post-detail.html">Beskeder</a>
+          <a class="icon-btn" href="../main/main.html">Notifikationer</a>
+          <a class="icon-btn" href="../profile/profile.html">Profil</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <section>
+          <h2 class="sidebar-title">Navigation</h2>
+          <a class="nav-link active" href="../main/main.html">Feed</a>
+          <a class="nav-link " href="../all-groups/all-groups.html">Alle grupper</a>
+          <a class="nav-link " href="../book-room/book-room.html">Book grupperum</a>
+        </section>
+        
+        <section class="grouped-section">
+        <%- include("../partials/group-nav", { groups: groups }) %>
+        </section>
+      </aside>
+
+      <main class="content">Software Design
+        <%- body %>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

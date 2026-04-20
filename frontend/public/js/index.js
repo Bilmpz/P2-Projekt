@@ -9,13 +9,14 @@ async function login() {
     const response = await fetch('http://localhost:3000/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: "include",
       body: JSON.stringify({ email: emailVal, password: passVal })
     })
     const data = await response.json()
 
     if (response.ok) {
       localStorage.setItem('token', data.token)
-      window.location.href = '../main/main.html'
+      window.location.href = '/main/groups'
     } else {
       error.innerText = data.message
       error.style.display = 'block'

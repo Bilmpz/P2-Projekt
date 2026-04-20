@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const groupMemberSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -17,3 +19,7 @@ const groupMemberSchema = new mongoose.Schema({
 
 // undgå duplicates
 groupMemberSchema.index({ user: 1, group: 1 }, { unique: true });
+
+const GroupMembership = mongoose.model("GroupMembership", groupMemberSchema);
+
+export default GroupMembership;

@@ -1,8 +1,7 @@
 import express, { Router } from "express";
-import { getGroupsPage } from "../controllers/groupController.js";
 
 const router = express.Router();
 
-router.get("/", getGroupsPage);
+router.get("/", getAllGroups);
 
 export default router;
