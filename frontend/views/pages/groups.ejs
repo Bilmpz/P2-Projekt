@@ -15,7 +15,17 @@
           <p><%= group.description %></p>
           <p class="subtle"><%= group.location %></p>
           <p class="subtle"><%= group.department %></p>
-          <a class="join-btn is-joined" href="/Skift-Dette-Til-All-Post-Som-Hører-Til-Denne-Group/:id">✓ Joined</a>
+
+    <% if (joinedGroupIds.includes(group._id.toString())) { %>
+      <form action="/main/groups/<%= group._id %>/leave" method="POST">
+        <button type="submit" class="join-btn is-joined">✓ Joined</button>
+      </form>
+
+    <% } else { %>
+      <form action="/main/groups/<%= group._id %>/join" method="POST">
+        <button type="submit" class="join-btn">Tilmeld</button>
+      </form>
+    <% } %>
         </article>
         <% }) %>
       </div>

@@ -15,7 +15,7 @@ const app = express()
 app.use(cors({ origin: 'http://127.0.0.1:5500' }))
 app.use(cookieParser())
 app.use(express.json())
-
+app.use(express.urlencoded({ extended: true }));
 const __filename = fileURLToPath(import.meta.url)
 // Get the directory name from the file path
 const __dirname = dirname(__filename)
