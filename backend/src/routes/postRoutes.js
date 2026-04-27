@@ -1,5 +1,6 @@
-import express from "express";
+import express, { Router } from "express";
 import {
+  getCreatePostPage,
   getGroupPosts,
   getPostById,
   createPost,
@@ -11,10 +12,12 @@ import authMiddleware from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // Public routes
+
 router.get("/group/:groupId", getGroupPosts);
 router.get("/:postId", getPostById);
 
 // Protected routes
+router.get("/create", authMiddleware, getCreatePostPage);
 router.post("/group/:groupId", authMiddleware, createPost);
 router.delete("/:postId", authMiddleware, deletePost);
 router.put("/:postId", authMiddleware, updatePost);

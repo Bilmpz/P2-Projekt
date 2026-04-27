@@ -1,0 +1,34 @@
+<div class="container">
+
+    <section class="page-head">
+      <h1>Alle fag</h1>
+      <p>Gennemse og tilmeld dig fag for at se study buddy-opslag.</p>
+    </section>
+              
+    <section class="grouped-section">
+      <h2 class="section-title">Computer Science</h2>
+      <div class="group-grid">
+        <% groups.forEach(group => { %>
+        <article class="group-card">
+          <div class="group-icon"></div>
+          <h3><%= group.name %></h3>
+          <p><%= group.description %></p>
+          <p class="subtle"><%= group.location %></p>
+          <p class="subtle"><%= group.department %></p>
+
+    <% if (joinedGroupIds.includes(group._id.toString())) { %>
+      <form action="/main/groups/<%= group._id %>/leave" method="POST">
+        <button type="submit" class="join-btn is-joined">✓ Joined</button>
+      </form>
+
+    <% } else { %>
+      <form action="/main/groups/<%= group._id %>/join" method="POST">
+        <button type="submit" class="join-btn">Tilmeld</button>
+      </form>
+    <% } %>
+        </article>
+        <% }) %>
+      </div>
+    </section>
+</div>
+    

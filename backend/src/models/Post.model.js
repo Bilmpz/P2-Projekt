@@ -1,3 +1,8 @@
+import mongoose from "mongoose";
+
+const { Schema } = mongoose;
+
+
 const postSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -10,7 +15,9 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   title: String,
-  content: String
+  content: String,
+  availability: String
 }, { timestamps: true });
 
-module.exports = mongoose.model("Post", postSchema);
+const Post = mongoose.model("Post", postSchema);
+export default Post;

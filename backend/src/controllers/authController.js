@@ -46,7 +46,12 @@ const loginUser = async (req, res) => {
         if(!isMatch) return res.status(400).json({message: "invalid credentials"});
 
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: '24h'})
-        res.status(200).json({token})
+            return res.status(200).cookie("token", token, {
+        httpOnly: true,
+        secure: false, // sæt true i production med HTTPS
+        sameSite: "lax",
+        maxAge: 24 * 60 * 60 * 1000
+      }).json({ message: "Login successful" });
         
     } catch(error){
         res.status(500).json({message: "internal server error", error: error.message})

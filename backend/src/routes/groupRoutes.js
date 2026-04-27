@@ -1,13 +1,12 @@
 import express, { Router } from "express";
-import { getAllGroups } from "../controllers/groupController.js";
+import { getGroupsPage, joinGroup, leaveGroup } from "../controllers/groupController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+
 
 const router = express.Router();
 
-router.get("/", getAllGroups);
-
-router.get("/", (req, res) => {
-  console.log("HIT /groups");
-  res.send("works");
-});
+router.get("/", getGroupsPage);
+router.post("/:groupId/join", authMiddleware, joinGroup)
+router.post("/:groupId/leave", authMiddleware, leaveGroup)
 
 export default router;
