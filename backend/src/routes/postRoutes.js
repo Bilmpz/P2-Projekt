@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 import {
   getCreatePostPage,
   getGroupPosts,
@@ -8,19 +8,18 @@ import {
   updatePost,
 } from "../controllers/postController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
+import loadUserGroups from "../middleware/LoadUserGroups.js";
 
 const router = express.Router();
 
-// Public routes
-router.get("/create", getCreatePostPage);
-router.post("/create", createPost);
-
-router.get("/group/:groupId", getGroupPosts);
-router.get("/:postId", getPostById);
-
-// Protected routes
-router.post("/group/:groupId", authMiddleware, createPost);
+// Protected routes — kræver login
+router.get("/create", authMiddleware, loadUserGroups, getCreatePostPage);
+router.post("/create", authMiddleware, createPost);
 router.delete("/:postId", authMiddleware, deletePost);
 router.put("/:postId", authMiddleware, updatePost);
+
+// Public routes
+router.get("/group/:groupId", getGroupPosts);
+router.get("/:postId", getPostById);
 
 export default router;

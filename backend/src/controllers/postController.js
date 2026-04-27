@@ -1,39 +1,82 @@
-import Group from "../models/Group.model.js"
-import GroupMembership from "../models/GroupMembership.model.js"
-import Post from  "../models/Post.model.js"
+import Group from "../models/Group.model.js";
+import GroupMembership from "../models/GroupMembership.model.js";
+import Post from "../models/Post.model.js";
 
+// GET /main/post/create
 const getCreatePostPage = async (req, res) => {
     try {
-        res.render("pages/createPost", { groups });
+        // groups kommer fra loadUserGroups middleware via res.locals
+        res.render("pages/createPost");
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-}
+};
 
+// POST /main/post/create
 const createPost = async (req, res) => {
     try {
-        const {title, content, availability} = req.body;
-        const {groupId} = req.body
-        const {UserId} = req.body
+        const { title, content, availability, group } = req.body;
+        const userId = req.userId;
 
-        if(!title || !content || !availability)
-            return res.status(400).json({message: "Titel og beskrivelse skal være udfyldt"});
+        if (!title || !content || !group) {
+            return res.status(400).send("Titel, beskrivelse og gruppe skal være udfyldt");
+        }
 
-
-        const post = await Post.create({
+        // Tjek at brugeren er medlem af gruppen
+        const membership = await GroupMembership.findOne({
             user: userId,
-            group: groupId,
+            group: group
+        });
+        if (!membership) {
+            return res.status(403).send("Du skal være medlem af gruppen for at oprette opslag");
+        }
+
+        await Post.create({
+            user: userId,
+            group,
             title,
             content,
             availability
-        })
+        });
 
+        return res.redirect(`/main/post/group/${group}`);
     } catch (error) {
         return res.status(500).send(error.message);
     }
-    
-}
+};
 
+// GET /main/post/group/:groupId
+const getGroupPosts = async (req, res) => {
+    try {
+        const { groupId } = req.params;
+        const group = await Group.findById(groupId);
+        if (!group) return res.status(404).send("Gruppen findes ikke");
+
+        const posts = await Post.find({ group: groupId })
+            .populate("user", "name")
+            .sort({ createdAt: -1 });
+
+        let isMember = false;
+        if (req.userId) {
+            const membership = await GroupMembership.findOne({
+                user: req.userId,
+                group: groupId
+            });
+            isMember = !!membership;
+        }
+
+        res.render("pages/groupPost", {
+            group,
+            posts,
+            isMember,
+            currentUserId: req.userId || null
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// GET /main/post/:postId
 const getPostById = async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId)
@@ -45,30 +88,14 @@ const getPostById = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-}
+};
 
-const getGroupPosts = async (req, res) => {
-    try {
-        const { groupId } = req.params;
-        const group = await Group.findById(groupId);
-        if (!group) return res.status(404).send("Gruppen findes ikke");
-
-        const posts = await Post.find({ group: groupId })
-            .populate("user", "name")     // hent navnet på posterens
-            .sort({ createdAt: -1 });     // nyeste først
-
-        res.render("pages/posts", { group, posts });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-}
-
+// DELETE /main/post/:postId
 const deletePost = async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId);
         if (!post) return res.status(404).send("Opslag ikke fundet");
 
-        // Kun ejeren må slette
         if (post.user.toString() !== req.userId) {
             return res.status(403).send("Du må kun slette dine egne opslag");
         }
@@ -78,8 +105,9 @@ const deletePost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-}
+};
 
+// PUT /main/post/:postId
 const updatePost = async (req, res) => {
     try {
         const { title, content, availability } = req.body;
@@ -99,6 +127,13 @@ const updatePost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-}
+};
 
-export {getCreatePostPage, createPost, deletePost, updatePost, getPostById, getGroupPosts}
+export {
+    getCreatePostPage,
+    createPost,
+    deletePost,
+    updatePost,
+    getPostById,
+    getGroupPosts
+};

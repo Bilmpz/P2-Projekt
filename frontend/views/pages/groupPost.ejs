@@ -1,0 +1,81 @@
+<div class="container">
+
+<section class="card hero-card" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap;">
+  <div>
+    <h1><%= group.name %></h1>
+    <div class="feed-meta" style="margin-top:12px;">
+      <% if (group.department) { %>
+        <span><%= group.department %></span>
+      <% } %>
+      <% if (group.location) { %>
+        <span>•</span>
+        <span><%= group.location %></span>
+      <% } %>
+    </div>
+  </div>
+  <div class="card-actions" style="display: flex; gap: 12px; align-items: center; flex-shrink: 0;">
+    <% if (isMember) { %>
+      <span class="join-btn is-joined">✓ Joined</span>
+    <% } else { %>
+      <form action="/main/groups/<%= group._id %>/join" method="POST" style="display:inline;">
+        <button type="submit" class="join-btn">Tilmeld</button>
+      </form>
+    <% } %>
+    <a class="primary-btn" href="/main/post/create">＋ Nyt opslag</a>
+  </div>
+</section>
+
+  <section class="page-head">
+    <h2 class="section-title">Study Buddy Requests</h2>
+    <p>
+      <% if (posts.length === 0) { %>
+        Ingen opslag endnu — vær den første!
+      <% } else { %>
+        <%= posts.length %> studerende søger læsemakkere i dette fag.
+      <% } %>
+    </p>
+  </section>
+
+  <section class="feed-stack">
+    <% posts.forEach(post => { %>
+      <%
+        const isOwn = currentUserId && post.user && post.user._id.toString() === currentUserId;
+        const ageMs = Date.now() - new Date(post.createdAt).getTime();
+        const ageDays = Math.floor(ageMs / (1000 * 60 * 60 * 24));
+        const isNew = ageDays < 2;
+        let timeLabel;
+        if (ageDays === 0) timeLabel = "I dag";
+        else if (ageDays === 1) timeLabel = "1 dag siden";
+        else timeLabel = ageDays + " dage siden";
+      %>
+      <article class="feed-card <%= isNew ? 'is-new' : '' %>">
+        <div class="feed-top">
+          <div>
+            <% if (isOwn) { %>
+              <div class="badge gray">Dit opslag</div>
+            <% } else if (isNew) { %>
+              <div class="badge primary">Nyt opslag</div>
+            <% } %>
+            <h3><%= post.title %></h3>
+            <p class="subtle"><%= post.user ? post.user.name : "Ukendt" %></p>
+          </div>
+          <div class="feed-meta"><span><%= timeLabel %></span></div>
+        </div>
+        <p>
+          <%= post.content.length > 200
+              ? post.content.substring(0, 200) + '…'
+              : post.content %>
+        </p>
+        <div class="feed-footer">
+          <div class="feed-meta">
+            <% if (post.availability) { %>
+              <span><%= post.availability %></span>
+            <% } %>
+          </div>
+          <a class="text-link" href="/main/post/<%= post._id %>">Se opslag</a>
+        </div>
+      </article>
+    <% }) %>
+  </section>
+
+</div>

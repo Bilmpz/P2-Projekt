@@ -15,7 +15,6 @@ const loadUserGroups = async (req, res, next) => {
     const groups = memberships.map(m => m.group);
 
     res.locals.groups = groups;
-
     return next();
   } catch (error) {
     return next(error);
