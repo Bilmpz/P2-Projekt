@@ -8,7 +8,8 @@
     <section class="grouped-section">
       <h2 class="section-title">Computer Science</h2>
       <div class="group-grid">
-        <% groups.forEach(group => { %>
+        <% allGroups.forEach(group => { %>
+        <a class="group-link " href="/main/post/group/<%= group._id %>">
         <article class="group-card">
           <div class="group-icon"></div>
           <h3><%= group.name %></h3>
@@ -26,7 +27,7 @@
         <button type="submit" class="join-btn">Tilmeld</button>
       </form>
     <% } %>
-        </article>
+        </article></a>
         <% }) %>
       </div>
     </section>

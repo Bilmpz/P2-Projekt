@@ -1,0 +1,80 @@
+<div class="container">
+
+  <section class="page-head">
+    <h1>Dit feed</h1>
+    <p>Opslag fra de fag du allerede har tilmeldt dig.</p>
+  </section>
+
+  <% if (posts.length === 0) { %>
+    <section class="card">
+      <p>Du har ingen opslag i dit feed endnu.</p>
+      <p class="subtle">Tilmeld dig nogle grupper for at se opslag her.</p>
+      <a href="/main/groups" class="primary-btn" style="margin-top: 12px; display: inline-block;">Find grupper</a>
+    </section>
+  <% } else { %>
+    <section class="feed-stack">
+      <% posts.forEach(post => { %>
+        <%
+          const isOwn = currentUserId && post.user && post.user._id.toString() === currentUserId;
+          const ageMs = Date.now() - new Date(post.createdAt).getTime();
+          const ageDays = Math.floor(ageMs / (1000 * 60 * 60 * 24));
+          const isNew = ageDays < 2;
+          let timeLabel;
+          if (ageDays === 0) timeLabel = "I dag";
+          else if (ageDays === 1) timeLabel = "1 dag siden";
+          else timeLabel = ageDays + " dage siden";
+        %>
+        <a class="text-link" href="/main/post/<%= post._id %>">
+        <article class="feed-card <%= isNew ? 'is-new' : '' %>">
+  <div class="feed-header">
+    <span class="kicker">
+      <a class="muted-link" href="/main/post/group/<%= post.group._id %>">
+        <%= post.group.name %>
+      </a>
+    </span>
+    <% if (isOwn) { %>
+      <div class="badge gray">Dit opslag</div>
+    <% } else if (isNew) { %>
+      <div class="badge primary">Ny</div>
+    <% } %>
+  </div>
+
+  <h3 class="feed-title"><%= post.title %></h3>
+
+  <dl class="feed-details">
+    <div class="feed-row">
+      <dt>Navn</dt>
+      <dd><%= post.user ? post.user.username : "Ukendt" %></dd>
+    </div>
+
+    <div class="feed-row">
+      <dt>Besked</dt>
+      <dd><%= post.content %></dd>
+    </div>
+
+    <% if (post.availability) { %>
+      <div class="feed-row">
+        <dt>Tilgængelig</dt>
+        <dd><%= post.availability %></dd>
+      </div>
+    <% } %>
+
+    <div class="feed-row">
+      <dt>Oprettet</dt>
+      <dd><%= timeLabel %></dd>
+    </div>
+  </dl>
+
+  <div class="feed-footer">
+      <a class="text-link" href="/main/post/<%= post._id %>">Åbn opslag</a>
+    <% if (!isOwn){ %>
+      <a class="message-btn" href="/main/post/<%= post._id %>">Send besked</a>
+    <% } %>
+  </div>
+</article>
+</a>
+      <% }) %>
+    </section>
+  <% } %>
+
+</div>

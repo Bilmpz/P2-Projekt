@@ -1,0 +1,61 @@
+<div class="container">
+
+  <a class="breadcrumb" href="/main/post/group/<%= post.group._id %>">
+    ← Tilbage til <%= post.group.name %>
+  </a>
+
+  <section class="detail-card">
+    <%
+      const isOwn = currentUserId && post.user && post.user._id.toString() === currentUserId;
+      const ageMs = Date.now() - new Date(post.createdAt).getTime();
+      const ageDays = Math.floor(ageMs / (1000 * 60 * 60 * 24));
+      let timeLabel;
+      if (ageDays === 0) timeLabel = "I dag";
+      else if (ageDays === 1) timeLabel = "1 dag siden";
+      else timeLabel = ageDays + " dage siden";
+
+      const authorName = post.user ? post.user.username : "Ukendt bruger";
+    %>
+
+    <div class="detail-top">
+      <div>
+        <a class="muted-link" href="/main/post/group/<%= post.group._id %>">
+          <%= post.group.name %>
+        </a>
+        <h1 style="margin-top:10px;"><%= post.title %></h1>
+        <div class="feed-meta" style="margin-top:12px;">
+          <span><%= authorName %></span>
+          <span>•</span>
+          <span><%= timeLabel %></span>
+        </div>
+      </div>
+      <div class="badge soft">Study Buddy</div>
+    </div>
+
+    <hr class="separator">
+
+    <section>
+      <h2 class="section-title" style="font-size:22px;">Beskrivelse</h2>
+      <p style="white-space: pre-wrap;"><%= post.content %></p>
+    </section>
+
+    <% if (post.availability) { %>
+      <section style="margin-top:24px;">
+        <h2 class="section-title" style="font-size:22px;">Foretrukne tidspunkter</h2>
+        <p><%= post.availability %></p>
+      </section>
+    <% } %>
+
+    <section style="margin-top:24px;">
+      <h2 class="section-title" style="font-size:22px;">Handling</h2>
+      <% if (isOwn) { %>
+        <p class="subtle">Dette er dit eget opslag.</p>
+      <% } else { %>
+        <a class="message-btn" href="#">
+          Send besked til <%= authorName %>
+        </a>
+      <% } %>
+    </section>
+  </section>
+
+</div>

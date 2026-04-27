@@ -5,8 +5,9 @@ import Post from "../models/Post.model.js";
 // GET /main/post/create
 const getCreatePostPage = async (req, res) => {
     try {
-        // groups kommer fra loadUserGroups middleware via res.locals
-        res.render("pages/createPost");
+        res.render("pages/createPost", {
+            selectedGroupId: req.query.group || null
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -45,6 +46,28 @@ const createPost = async (req, res) => {
     }
 };
 
+const getFeedPage = async (req, res) => {
+    try {
+        const memberships = await GroupMembership.find({ user: req.userId });
+        const groupIds = memberships.map(m => m.group);
+
+        const posts = await Post.find({ group: { $in: groupIds } })
+            .populate("user", "username")
+            .populate("group", "name")
+            .sort({ createdAt: -1 });
+
+        res.render("pages/feed", {
+            posts,
+            currentUserId: req.userId
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
+
+
 // GET /main/post/group/:groupId
 const getGroupPosts = async (req, res) => {
     try {
@@ -53,7 +76,7 @@ const getGroupPosts = async (req, res) => {
         if (!group) return res.status(404).send("Gruppen findes ikke");
 
         const posts = await Post.find({ group: groupId })
-            .populate("user", "name")
+            .populate("user", "username")
             .sort({ createdAt: -1 });
 
         let isMember = false;
@@ -80,11 +103,14 @@ const getGroupPosts = async (req, res) => {
 const getPostById = async (req, res) => {
     try {
         const post = await Post.findById(req.params.postId)
-            .populate("user", "name")
+            .populate("user", "username")
             .populate("group", "name");
         if (!post) return res.status(404).send("Opslag ikke fundet");
 
-        res.render("pages/postDetail", { post });
+        res.render("pages/posts", {
+            post,
+            currentUserId: req.userId || null
+        });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -135,5 +161,6 @@ export {
     deletePost,
     updatePost,
     getPostById,
-    getGroupPosts
+    getGroupPosts,
+    getFeedPage
 };

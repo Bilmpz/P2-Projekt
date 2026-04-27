@@ -1,7 +1,15 @@
         <section class="grouped-section">
-          
-          <h2 class="sidebar-title">Mine grupper (3)</h2>
+
+
+
+          <h2 class="sidebar-title">
+            <% if (groups.length === 0) { %>
+              Mine grupper (0)
+            <% } else { %>
+              Mine grupper ( <%= groups.length %> )
+            <% } %> 
+          </h2>
           <% groups.forEach(group => { %>
-          <a class="group-link " href="post/group/:groupId"><%= group.name %> <span><%= group.description%></span></a>
+          <a class="group-link " href="/main/post/group/<%= group._id %>"><%= group.name %> <span><%= group.description%></span></a>
           <% }) %>
         </section>

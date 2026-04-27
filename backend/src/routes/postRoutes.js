@@ -6,20 +6,17 @@ import {
   createPost,
   deletePost,
   updatePost,
+  getFeedPage,
 } from "../controllers/postController.js";
-import authMiddleware from "../middleware/authMiddleware.js";
-import loadUserGroups from "../middleware/LoadUserGroups.js";
 
 const router = express.Router();
 
-// Protected routes — kræver login
-router.get("/create", authMiddleware, loadUserGroups, getCreatePostPage);
-router.post("/create", authMiddleware, createPost);
-router.delete("/:postId", authMiddleware, deletePost);
-router.put("/:postId", authMiddleware, updatePost);
-
-// Public routes
+router.get("/feed", getFeedPage);
+router.get("/create", getCreatePostPage);
+router.post("/create", createPost);
 router.get("/group/:groupId", getGroupPosts);
 router.get("/:postId", getPostById);
+router.delete("/:postId", deletePost);
+router.put("/:postId", updatePost);
 
 export default router;

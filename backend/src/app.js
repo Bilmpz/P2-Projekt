@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url'
 import cookieParser from "cookie-parser";
 import expressLayouts from "express-ejs-layouts";
 import { getGroupsPage } from "./controllers/groupController.js"
+import messageRoutes  from "./routes/messageRoutes.js"
 
 
 const app = express()
@@ -31,11 +32,14 @@ app.set("layout", "layouts/main");
 
 app.use(authMiddleware);    //sætter req.userId
 app.use(loadUserGroups);    //sætter res.locals.groups
+
+app.use("/api/messages", messageRoutes)
  
 
 app.use("/auth", authRoutes)
 app.use("/main/post", authMiddleware, postRoutes);
 app.use("/main/groups", authMiddleware, groupRoutes)
+
 
 
 // Get the file path from the URL of the current module

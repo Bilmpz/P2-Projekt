@@ -3,18 +3,15 @@ import GroupMembership from "../models/GroupMembership.model.js";
 
 const getGroupsPage = async (req, res) => {
     try {
-        const groups = await Group.find();
+        const allGroups = await Group.find();
         const memberships = await GroupMembership.find({ user: req.userId });
-        
+        const joinedGroupIds = memberships.map(m => m.group.toString());
 
-        // Find ud af hva fuck det her 100% gør
-        const joinedGroupIds = memberships.map(m => m.group.toString())
-
-        res.render("pages/groups", {groups, joinedGroupIds})
+        res.render("pages/groups", { allGroups, joinedGroupIds });
     } catch (error) {
-        res.status(500).json({ error: error.message});
+        res.status(500).json({ error: error.message });
     }
-}
+};
 
 const joinGroup = async (req, res) => {
     try{
