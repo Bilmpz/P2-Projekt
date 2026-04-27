@@ -12,12 +12,13 @@ import authMiddleware from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 // Public routes
+router.get("/create", getCreatePostPage);
+router.post("/create", createPost);
 
 router.get("/group/:groupId", getGroupPosts);
 router.get("/:postId", getPostById);
 
 // Protected routes
-router.get("/create", authMiddleware, getCreatePostPage);
 router.post("/group/:groupId", authMiddleware, createPost);
 router.delete("/:postId", authMiddleware, deletePost);
 router.put("/:postId", authMiddleware, updatePost);

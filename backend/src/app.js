@@ -3,6 +3,7 @@ import authRoutes from "./routes/authRoutes.js"
 import groupRoutes from "./routes/groupRoutes.js"
 import postRoutes from "./routes/postRoutes.js"
 import authMiddleware from "./middleware/authMiddleware.js"
+import loadUserGroups from "./middleware/LoadUserGroups.js"
 import cors from 'cors'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -28,10 +29,14 @@ app.use(expressLayouts);
 app.set("layout", "layouts/main");
 
 
+app.use(authMiddleware);    //sætter req.userId
+app.use(loadUserGroups);    //sætter res.locals.groups
+ 
+
 app.use("/auth", authRoutes)
-//app.use("/groups", authMiddleware, groupRoutes)
+app.use("/main/post", authMiddleware, postRoutes);
 app.use("/main/groups", authMiddleware, groupRoutes)
-app.use("/main/post", authMiddleware, postRoutes)
+
 
 // Get the file path from the URL of the current module
 
