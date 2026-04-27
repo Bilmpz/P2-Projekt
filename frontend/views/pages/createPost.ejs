@@ -1,0 +1,53 @@
+<div class="container">
+  <section class="page-head">
+    <h1>Opret opslag</h1>
+    <p>Lav et nyt opslag i en af dine grupper.</p>
+  </section>
+
+  <section class="form-card">
+    <form action="/posts/create" method="POST" class="stack">
+      <div class="field">
+        <label for="group">Gruppe</label>
+        <select name="group" id="group" required>
+          <option value="">Vælg en gruppe</option>
+          <% groups.forEach(group => { %>
+            <option value="<%= group._id %>"><%= group.name %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="title">Titel</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Fx Søger studiegruppe til Software Design"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="content">Beskrivelse</label>
+        <textarea
+          id="content"
+          name="content"
+          placeholder="Skriv lidt om hvad du søger..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label for="availability">Tilgængelighed</label>
+        <input
+          type="text"
+          id="availability"
+          name="availability"
+          placeholder="Fx Man-fre efter kl. 14"
+        >
+      </div>
+
+      <button type="submit" class="primary-btn">Opret opslag</button>
+    </form>
+  </section>
+</div>

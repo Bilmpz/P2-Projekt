@@ -1,6 +1,7 @@
 import express from "express"
 import authRoutes from "./routes/authRoutes.js" 
 import groupRoutes from "./routes/groupRoutes.js"
+import postRoutes from "./routes/postRoutes.js"
 import authMiddleware from "./middleware/authMiddleware.js"
 import cors from 'cors'
 import path, { dirname } from 'path'
@@ -30,6 +31,7 @@ app.set("layout", "layouts/main");
 app.use("/auth", authRoutes)
 //app.use("/groups", authMiddleware, groupRoutes)
 app.use("/main/groups", authMiddleware, groupRoutes)
+app.use("/main/post", authMiddleware, postRoutes)
 
 // Get the file path from the URL of the current module
 

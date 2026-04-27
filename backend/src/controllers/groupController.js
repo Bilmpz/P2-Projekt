@@ -68,13 +68,12 @@ const leaveGroup = async (req, res) => {
         })
 
         if(existingMembership){
-            return res.redirect("main/groups")
+            await GroupMembership.findOneAndDelete({
+                user: userId,
+                group: groupId
+            })
+            return res.redirect("/main/groups")
         }
-
-        await GroupMembership.create({
-            user: userId,
-            group: groupId
-        })
 
         return res.redirect("/main/groups")
     } catch (error){
@@ -87,3 +86,4 @@ const leaveGroup = async (req, res) => {
 }
 export { joinGroup }
 export { getGroupsPage }
+export { leaveGroup }
