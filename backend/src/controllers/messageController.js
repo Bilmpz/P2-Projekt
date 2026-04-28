@@ -1,5 +1,5 @@
 import { Message } from "../models/Message.model.js";
-
+// mig der sender ting 
 const sendMessage = async (req, res) =>{
     try {
         const {sender, reciver, text} = req.body;
