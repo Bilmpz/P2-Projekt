@@ -127,7 +127,9 @@ const deletePost = async (req, res) => {
         }
 
         await post.deleteOne();
-        return res.redirect(req.get("Referer") || `/main/post/group/${post.group}`);
+
+        return res.redirect("/main/post/feed");
+
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

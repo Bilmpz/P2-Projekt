@@ -48,6 +48,31 @@ a { text-decoration: none; color: inherit; }
   padding: 28px;
 }
 
+/* ===== SELECT ===== */
+.field select {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  font: inherit;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field select:focus {
+  border-color: var(--primary);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(109, 74, 255, 0.12);
+}
+
 /* ===== TOPBAR ===== */
 .topbar {
   position: sticky;
@@ -198,6 +223,8 @@ a { text-decoration: none; color: inherit; }
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  flex: 1;
+  text-align: left;
 }
 
 .kicker .muted-link {
@@ -724,7 +751,9 @@ a { text-decoration: none; color: inherit; }
   color: var(--muted);
   font-weight: 600;
   font-size: 13px;
+
 }
+
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
