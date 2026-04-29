@@ -52,7 +52,7 @@ const getFeedPage = async (req, res) => {
         const groupIds = memberships.map(m => m.group);
 
         const posts = await Post.find({ group: { $in: groupIds } })
-            .populate("user", "username")
+            .populate("user", "username email")
             .populate("group", "name")
             .sort({ createdAt: -1 });
 
@@ -76,7 +76,7 @@ const getGroupPosts = async (req, res) => {
         if (!group) return res.status(404).send("Gruppen findes ikke");
 
         const posts = await Post.find({ group: groupId })
-            .populate("user", "username")
+            .populate("user", "username email")
             .sort({ createdAt: -1 });
 
         let isMember = false;

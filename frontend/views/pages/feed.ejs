@@ -67,9 +67,14 @@
 
           <div class="feed-footer">
             <a class="text-link" href="/main/post/<%= post._id %>">Åbn opslag</a>
-            <% if (!isOwn) { %>
-              <a class="message-btn" href="/main/post/<%= post._id %>">Send besked</a>
-            <% } %>
+            <% if (!isOwn && post.user && post.user.email) { %>
+  <a
+    class="message-btn"
+    href="mailto:<%= post.user.email %>?subject=Ang%C3%A5ende%20dit%20opslag:%20<%= encodeURIComponent(post.title) %>&body=Hej%20<%= encodeURIComponent(post.user.username) %>,%0A%0AJeg%20er%20interesseret%20i%20dit%20opslag.%0A%0AVh"
+  >
+    Send email
+  </a>
+<% } %>
           </div>
         </article>
 

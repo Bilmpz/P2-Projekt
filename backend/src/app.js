@@ -9,7 +9,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import cookieParser from "cookie-parser";
 import expressLayouts from "express-ejs-layouts";
-import messageRoutes from "./routes/messageRoutes.js"
+
 
 const app = express()
 
@@ -37,7 +37,7 @@ app.set("layout", "layouts/main")
 // --- Statiske filer (public) ---
 app.use(express.static(path.join(__dirname, '../../frontend/public')))
 
-// --- PUBLIC ROUTES (ingen login krævet) ---
+// --- PUBLIC ROUTES (ingen login krævet) --- 
 app.get('/', (req, res) => {
     res.render("pages/index", { layout: false })
 })
@@ -49,6 +49,6 @@ app.use(loadUserGroups)
 
 app.use("/main/post", postRoutes)
 app.use("/main/groups", groupRoutes)
-app.use("/api/messages", messageRoutes)
+ 
 
 export default app

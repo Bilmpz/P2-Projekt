@@ -1,66 +1,105 @@
 <div class="container">
 
-  <a class="breadcrumb" href="/main/post/group/<%= post.group._id %>">
-    ← Tilbage til <%= post.group.name %>
-  </a>
+    <a class="breadcrumb" href="/main/post/group/<%= post.group._id %>">
+        ← Tilbage til <%= post.group.name %>
+    </a>
 
-  <section class="detail-card">
-    <%
-      const isOwn = currentUserId && post.user && post.user._id.toString() === currentUserId;
-      const ageMs = Date.now() - new Date(post.createdAt).getTime();
-      const ageDays = Math.floor(ageMs / (1000 * 60 * 60 * 24));
-      let timeLabel;
-      if (ageDays === 0) timeLabel = "I dag";
-      else if (ageDays === 1) timeLabel = "1 dag siden";
-      else timeLabel = ageDays + " dage siden";
 
-      const authorName = post.user ? post.user.username : "Ukendt bruger";
+    <% 
+    const isOwn=currentUserId && post.user && post.user._id.toString()===currentUserId; 
+    const ageMs=Date.now() - new Date(post.createdAt).getTime();
+    const ageDays=Math.floor(ageMs / (1000 * 60 * 60 * 24)); let timeLabel; 
+    if(ageDays===0) timeLabel="I dag" ;
+    else if (ageDays===1) timeLabel="1 dag siden" ; 
+    else timeLabel=ageDays + " dage siden" ; 
+    const authorName=post.user ? post.user.username : "Ukendt bruger" ; 
     %>
+        <% if (isOwn) { %>
+            <form action="/main/post/<%= post._id %>/edit" method="POST" class="detail-card edit-post-card">
 
+                <div class="detail-top">
+                    <a class="muted-link" href="/main/post/group/<%= post.group._id %>">
+                        <%= post.group.name %>
+                    </a>
+                    <div class="badge soft">Study Buddy</div>
+                </div>
+                <label class="edit-label" for="title">Title</label>
+                <div class="field">
+                    <input class="edit-title" type="text" name="title" value="<%= post.title %>" required>
+                </div>
+
+                <hr class="separator">
+
+                <label class="edit-label" for="content">Beskrivelse</label>
+                <div class="field">
+                    <textarea id="content" name="content" class="edit-textarea" required><%= post.content %></textarea>
+                </div>
+                <label class="edit-label" for="availability">Foretrukne tidspunkter</label>
+                <div class="field">
+                    <input id="availability" name="availability" class="edit-input" type="text"
+                        value="<%= post.availability %>">
+                </div>
+                <hr class="separator">
+
+                <div class="detail-actions">
+                    <button type="submit" class="primary-btn">Gem ændringer</button>
+
+
+
+
+            </form>
+            <form action="/main/post/<%= post._id %>/delete" method="POST"
+                onsubmit="return confirm('Er du sikker på du vil slette denne post?');">
+                <button type="submit" class="delete-btn">Slet</button>
+            </form>
+</div>
+
+<% } else { %>
+<section class="detail-card">
     <div class="detail-top">
-      <div>
-        <a class="muted-link" href="/main/post/group/<%= post.group._id %>">
-          <%= post.group.name %>
-        </a>
-        <h1><%= post.title %></h1>
-        <div class="feed-meta">
-          <span><%= authorName %></span>
-          <span>•</span>
-          <span><%= timeLabel %></span>
+        <div>
+            <a class="muted-link" href="/main/post/group/<%= post.group._id %>">
+                <%= post.group.name %>
+            </a>
+            <h1>
+                <%= post.title %>
+            </h1>
+            <div class="feed-meta">
+                <span>
+                    <%= authorName %>
+                </span>
+                <span>•</span>
+                <span>
+                    <%= timeLabel %>
+                </span>
+            </div>
         </div>
-      </div>
-      <div class="badge soft">Study Buddy</div>
+        <div class="badge soft">Study Buddy</div>
     </div>
 
     <hr class="separator">
 
     <section>
-      <h2 class="section-title">Beskrivelse</h2>
-      <p><%= post.content %></p>
+        <h2 class="section-title">Beskrivelse</h2>
+        <p><%= post.content %></p>
     </section>
 
     <% if (post.availability) { %>
-      <section>
-        <h2 class="section-title">Foretrukne tidspunkter</h2>
-        <p><%= post.availability %></p>
-      </section>
-    <% } %>
+        <section>
+            <h2 class="section-title">Foretrukne tidspunkter</h2>
+            <p><%= post.availability %></p>
+        </section>
+        <% } %>
 
-    <hr class="separator">
+            <hr class="separator">
 
-    <div class="detail-actions">
-      <% if (isOwn) { %>
-      <form action="/main/post/<%= post._id %>/delete" method="POST"
-        onsubmit="return confirm('Er du sikker på du vil slette denne post?');">
-        <button type="submit" class="delete-btn">Slet</button>
-      </form>
-        <p class="subtle">Dette er dit eget opslag.</p>
-      <% } else { %>
-        <a class="message-btn" href="#">
-          Send besked til <%= authorName %>
-        </a>
-      <% } %>
-    </div>
-  </section>
-
+            <div class="detail-actions">
+                <a class="message-btn"
+                    href="mailto:<%= post.user.email %>?subject=Ang%C3%A5ende%20dit%20opslag:%20<%= encodeURIComponent(post.title) %>&body=Hej%20<%= encodeURIComponent(post.user.username) %>,%0A%0AJeg%20er%20interesseret%20i%20dit%20opslag.%0A%0AVh">
+                    Send email
+                </a>
+            </div>
+            
+</section>
+            <% } %>
 </div>

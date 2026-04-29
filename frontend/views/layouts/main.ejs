@@ -10,12 +10,10 @@
   <div class="shell">
     <header class="topbar">
       <div class="topbar-inner">
-  <a class="brand" href="/main/post/feed">
-          <span class="brand-mark">A</span>
-          <span>
-            AAU Study Buddy
-          </span>
-        </a>
+      <a class="brand" href="/main/post/feed">
+        <img class="brand-mark" src="/img/aau.svg" alt="AAU">
+        <span>AAU Study Buddy</span>
+      </a>
         <div class="header-actions">
           <a class="primary-btn" href="/main/post/create">＋ Nyt opslag</a>
           <a class="icon-btn" href="/auth/profile">Profil</a>
@@ -25,20 +23,20 @@
 
     <div class="layout">
       <aside class="sidebar">
-      <section>
-        <h2 class="sidebar-title">Navigation</h2>
-        <a class="nav-link <%= currentPath.startsWith('/main/post') ? 'active' : '' %>" 
-          href="/main/post/feed">Feed</a>
-        <a class="nav-link <%= currentPath.startsWith('/main/groups') ? 'active' : '' %>" 
-          href="/main/groups">Alle grupper</a>
-      </section>
-        
+        <section>
+          <h2 class="sidebar-title">Navigation</h2>
+          <a class="nav-link <%= currentPath.startsWith('/main/post') ? 'active' : '' %>"
+             href="/main/post/feed">Feed</a>
+          <a class="nav-link <%= currentPath.startsWith('/main/groups') ? 'active' : '' %>"
+             href="/main/groups">Alle grupper</a>
+        </section>
+
         <section class="grouped-section">
-        <%- include("../partials/group-nav", { groups: groups }) %>
+          <%- include("../partials/group-nav", { groups: groups }) %>
         </section>
       </aside>
 
-      <main class="content">Aalborg Universitet København 
+      <main class="content">
         <%- body %>
       </main>
     </div>

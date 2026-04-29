@@ -102,11 +102,7 @@ a { text-decoration: none; color: inherit; }
 .brand-mark {
   width: 46px;
   height: 46px;
-  border-radius: 14px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--primary), #8d72ff);
-  color: white;
+  flex-shrink: 0;
 }
 
 .header-actions {
@@ -181,6 +177,40 @@ a { text-decoration: none; color: inherit; }
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+/* ===== PAGE HEAD ===== */
+.page-head {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.page-head h1 {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 8px 0;
+  color: var(--text);
+}
+
+.page-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
 }
 
 /* ===== CARDS ===== */
@@ -479,7 +509,7 @@ a { text-decoration: none; color: inherit; }
   position: relative;
   overflow: hidden;
 }
-
+/*
 .detail-card::before {
   content: "";
   position: absolute;
@@ -489,7 +519,7 @@ a { text-decoration: none; color: inherit; }
   height: 4px;
   background: linear-gradient(90deg, var(--primary), #8d72ff);
 }
-
+*/
 .detail-top {
   display: flex;
   justify-content: space-between;
@@ -799,4 +829,79 @@ a { text-decoration: none; color: inherit; }
 .delete-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 12px 25px rgba(239, 68, 68, 0.35);
+}
+
+
+.edit-title {
+  width: 100%;
+  border: 0;
+  outline: none;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  margin: 12px 0;
+  background: transparent;
+}
+
+.edit-kicker {
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--primary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.edit-label {
+  display: block;
+  margin: 24px 0 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.edit-textarea,
+.edit-input {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #f9fafb;
+  color: var(--text);
+  font: inherit;
+}
+
+.edit-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.edit-textarea:focus,
+.edit-input:focus,
+.edit-title:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(109, 74, 255, 0.12);
+  background: white;
+}
+
+.edit-actions {
+  justify-content: flex-end;
+}
+
+.detail-card.edit-post-card::before {
+  display: none;
+}
+
+.detail-card > section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-card section p {
+  margin: 0;
+  padding: 0;
 }
