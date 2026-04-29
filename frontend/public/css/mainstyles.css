@@ -461,14 +461,9 @@ a {
 }
 
 /* Avatar-cirkel før forfatternavnet */
-.feed-meta > span:first-child::before {
-  content: "";
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), #8d72ff);
-  flex-shrink: 0;
+.feed-meta > span:first-child {
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* Separator */

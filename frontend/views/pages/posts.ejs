@@ -22,8 +22,8 @@
         <a class="muted-link" href="/main/post/group/<%= post.group._id %>">
           <%= post.group.name %>
         </a>
-        <h1 style="margin-top:10px;"><%= post.title %></h1>
-        <div class="feed-meta" style="margin-top:12px;">
+        <h1><%= post.title %></h1>
+        <div class="feed-meta">
           <span><%= authorName %></span>
           <span>•</span>
           <span><%= timeLabel %></span>
@@ -35,30 +35,28 @@
     <hr class="separator">
 
     <section>
-      <h2 class="section-title" style="font-size:22px;">Beskrivelse</h2>
-      <p style="white-space: pre-wrap;"><%= post.content %></p>
+      <h2 class="section-title">Beskrivelse</h2>
+      <p><%= post.content %></p>
     </section>
 
     <% if (post.availability) { %>
-      <section style="margin-top:24px;">
-        <h2 class="section-title" style="font-size:22px;">Foretrukne tidspunkter</h2>
+      <section>
+        <h2 class="section-title">Foretrukne tidspunkter</h2>
         <p><%= post.availability %></p>
       </section>
     <% } %>
 
-    <section style="margin-top:24px;">
-      <h2 class="section-title" style="font-size:22px;">Handling</h2>
+    <hr class="separator">
+
+    <div class="detail-actions">
       <% if (isOwn) { %>
-        <a class="message-btn" href="#">
-          Send besked til <%= authorName %>
-        </a>
         <p class="subtle">Dette er dit eget opslag.</p>
       <% } else { %>
         <a class="message-btn" href="#">
           Send besked til <%= authorName %>
         </a>
       <% } %>
-    </section>
+    </div>
   </section>
 
 </div>
