@@ -355,6 +355,173 @@ a {
   color: var(--muted);
 }
 
+
+/* ===== POST DETAIL PAGE ===== */
+
+/* Breadcrumb pill */
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: white;
+  border: 1px solid var(--border);
+  width: fit-content;
+  transition: all 0.15s ease;
+}
+
+.breadcrumb:hover {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  border-color: rgba(109, 74, 255, 0.3);
+  transform: translateX(-3px);
+}
+
+/* Hovedkort */
+.detail-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Accent-bar i toppen */
+.detail-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), #8d72ff);
+}
+
+/* Header: titel/gruppe/meta venstre, badge højre */
+.detail-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.detail-top > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.detail-top h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 12px 0 0 0;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+/* "Gruppenavn" over titlen */
+.muted-link {
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.muted-link:hover {
+  text-decoration: underline;
+}
+
+/* Author + tid */
+.feed-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.feed-meta > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Avatar-cirkel før forfatternavnet */
+.feed-meta > span:first-child::before {
+  content: "";
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #8d72ff);
+  flex-shrink: 0;
+}
+
+/* Separator */
+.separator {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* Sektioner inde i kortet */
+.detail-card > section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.detail-card section p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text);
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Footer / action-område */
+.detail-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-actions .subtle {
+  font-style: italic;
+  margin: 0;
+}
+
+/* Mobil */
+@media (max-width: 700px) {
+  .detail-card { padding: 28px 22px; }
+  .detail-top { flex-direction: column; gap: 12px; }
+  .detail-top h1 { font-size: 26px; }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .layout {

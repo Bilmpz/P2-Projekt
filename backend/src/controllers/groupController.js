@@ -6,7 +6,7 @@ const getGroupsPage = async (req, res) => {
         const allGroups = await Group.find();
         const memberships = await GroupMembership.find({ user: req.userId });
         const joinedGroupIds = memberships.map(m => m.group.toString());
-
+        console.log(req.userId);
         res.render("pages/groups", { allGroups, joinedGroupIds });
     } catch (error) {
         res.status(500).json({ error: error.message });

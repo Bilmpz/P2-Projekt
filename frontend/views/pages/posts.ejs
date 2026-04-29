@@ -49,6 +49,9 @@
     <section style="margin-top:24px;">
       <h2 class="section-title" style="font-size:22px;">Handling</h2>
       <% if (isOwn) { %>
+        <a class="message-btn" href="#">
+          Send besked til <%= authorName %>
+        </a>
         <p class="subtle">Dette er dit eget opslag.</p>
       <% } else { %>
         <a class="message-btn" href="#">

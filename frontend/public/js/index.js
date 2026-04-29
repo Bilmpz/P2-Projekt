@@ -16,7 +16,7 @@ async function login() {
 
     if (response.ok) {
       localStorage.setItem('token', data.token)
-      window.location.href = '/main/groups'
+      window.location.href = '/main/post/feed'
     } else {
       error.innerText = data.message
       error.style.display = 'block'
