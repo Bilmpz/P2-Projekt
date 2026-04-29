@@ -50,6 +50,10 @@
 
     <div class="detail-actions">
       <% if (isOwn) { %>
+      <form action="/main/post/<%= post._id %>/delete" method="POST"
+        onsubmit="return confirm('Er du sikker på du vil slette denne post?');">
+        <button type="submit" class="delete-btn">Slet</button>
+      </form>
         <p class="subtle">Dette er dit eget opslag.</p>
       <% } else { %>
         <a class="message-btn" href="#">

@@ -22,6 +22,12 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// Active buttons
+app.use((req, res, next) => {
+    res.locals.currentPath = req.path;
+    next();
+});
+
 // --- View engine ---
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "../../frontend/views"))
@@ -35,11 +41,11 @@ app.use(express.static(path.join(__dirname, '../../frontend/public')))
 app.get('/', (req, res) => {
     res.render("pages/index", { layout: false })
 })
-app.use("/auth", authRoutes)   // <-- FLYTTET OP, før authMiddleware
+app.use("/auth", authRoutes)
 
 // --- Herfra og ned: kræver login ---
-app.use(authMiddleware)        // sætter req.userId
-app.use(loadUserGroups)        // sætter res.locals.groups
+app.use(authMiddleware)
+app.use(loadUserGroups)
 
 app.use("/main/post", postRoutes)
 app.use("/main/groups", groupRoutes)

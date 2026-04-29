@@ -21,13 +21,9 @@
 }
 
 /* ===== RESET ===== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -38,15 +34,10 @@ body {
   color: var(--text);
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+a { text-decoration: none; color: inherit; }
 
 /* ===== LAYOUT ===== */
-.shell {
-  min-height: 100vh;
-}
+.shell { min-height: 100vh; }
 
 .layout {
   max-width: 1440px;
@@ -93,6 +84,24 @@ a {
   color: white;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #f3f4f6;
+  color: #374151;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.15s ease;
+}
+
+.icon-btn:hover { background: #e5e7eb; }
+
 /* ===== SIDEBAR ===== */
 .sidebar {
   background: white;
@@ -101,7 +110,18 @@ a {
   padding: 22px;
   position: sticky;
   top: 96px;
+  align-self: start;
 }
+
+.sidebar-title {
+  margin: 0 0 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.grouped-section { margin-top: 28px; }
 
 .nav-link,
 .group-link {
@@ -110,22 +130,27 @@ a {
   border-radius: 14px;
   font-weight: 600;
   margin-bottom: 8px;
+  color: #374151;
 }
 
 .nav-link:hover,
-.group-link:hover {
-  background: #f5f3ff;
-}
+.group-link:hover { background: #f5f3ff; }
 
 .nav-link.active {
   background: var(--primary);
   color: white;
 }
 
-/* ===== CONTENT ===== */
-.content {
-  min-width: 0;
+.group-link span {
+  color: var(--muted);
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+  font-weight: 500;
 }
+
+/* ===== CONTENT ===== */
+.content { min-width: 0; }
 
 .container {
   display: flex;
@@ -144,11 +169,6 @@ a {
   padding: 24px;
 }
 
-.join-btn.is-joined {
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
 /* ===== FEED CARDS ===== */
 .feed-card {
   display: flex;
@@ -164,11 +184,8 @@ a {
   border-color: rgba(109, 74, 255, 0.25);
 }
 
-.feed-card.is-new {
-  border-left: 4px solid var(--primary);
-}
+.feed-card.is-new { border-left: 4px solid var(--primary); }
 
-/* Header — kicker venstre, badge højre */
 .feed-header {
   display: flex;
   justify-content: space-between;
@@ -188,11 +205,8 @@ a {
   text-decoration: none;
 }
 
-.kicker .muted-link:hover {
-  text-decoration: underline;
-}
+.kicker .muted-link:hover { text-decoration: underline; }
 
-/* Titel */
 .feed-title {
   font-size: 22px;
   font-weight: 700;
@@ -202,7 +216,6 @@ a {
   line-height: 1.3;
 }
 
-/* Definition list med labels venstre, indhold højre */
 .feed-details {
   display: flex;
   flex-direction: column;
@@ -237,7 +250,7 @@ a {
   word-break: break-word;
 }
 
-/* Badges */
+/* ===== BADGES ===== */
 .badge {
   display: inline-block;
   font-size: 11px;
@@ -264,7 +277,7 @@ a {
   color: var(--success-text);
 }
 
-/* Footer med knap nede til højre */
+/* ===== FOOTER ===== */
 .feed-footer {
   display: flex;
   justify-content: space-between;
@@ -295,9 +308,7 @@ a {
   text-decoration: none;
 }
 
-.text-link:hover {
-  text-decoration: underline;
-}
+.text-link:hover { text-decoration: underline; }
 
 .feed-stack {
   display: flex;
@@ -314,15 +325,25 @@ a {
   border-radius: 14px;
   padding: 12px 18px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .primary-btn:hover {
   background: var(--primary-dark);
+  transform: translateY(-1px);
 }
 
 .join-btn.is-joined {
   background: var(--success);
   color: var(--success-text);
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 /* ===== GROUP GRID ===== */
@@ -332,9 +353,7 @@ a {
   gap: 18px;
 }
 
-.group-card:hover {
-  transform: translateY(-3px);
-}
+.group-card:hover { transform: translateY(-3px); }
 
 /* ===== FORMS ===== */
 .field {
@@ -343,22 +362,62 @@ a {
   gap: 8px;
 }
 
+.field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
 .field input,
 .field textarea {
-  padding: 12px;
+  padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid var(--border);
+  background: #f9fafb;
+  font: inherit;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--primary);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(109, 74, 255, 0.12);
+}
+
+.field input:invalid:not(:placeholder-shown),
+.field textarea:invalid:not(:placeholder-shown) {
+  /* Fjerner browserens røde validerings-prikker */
+  box-shadow: none;
+}
+
+.field textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.field-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.field-grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.stack {
+  display: grid;
+  gap: 18px;
 }
 
 /* ===== UTIL ===== */
-.subtle {
+.subtle { color: var(--muted); }
+
+.lead {
   color: var(--muted);
+  margin: 0;
 }
 
-
 /* ===== POST DETAIL PAGE ===== */
-
-/* Breadcrumb pill */
 .breadcrumb {
   display: inline-flex;
   align-items: center;
@@ -381,7 +440,6 @@ a {
   transform: translateX(-3px);
 }
 
-/* Hovedkort */
 .detail-card {
   background: var(--surface);
   border-radius: var(--radius-lg);
@@ -395,7 +453,6 @@ a {
   overflow: hidden;
 }
 
-/* Accent-bar i toppen */
 .detail-card::before {
   content: "";
   position: absolute;
@@ -406,7 +463,6 @@ a {
   background: linear-gradient(90deg, var(--primary), #8d72ff);
 }
 
-/* Header: titel/gruppe/meta venstre, badge højre */
 .detail-top {
   display: flex;
   justify-content: space-between;
@@ -428,7 +484,6 @@ a {
   color: var(--text);
 }
 
-/* "Gruppenavn" over titlen */
 .muted-link {
   display: inline-block;
   color: var(--primary);
@@ -438,11 +493,8 @@ a {
   letter-spacing: 0.08em;
 }
 
-.muted-link:hover {
-  text-decoration: underline;
-}
+.muted-link:hover { text-decoration: underline; }
 
-/* Author + tid */
 .feed-meta {
   display: flex;
   align-items: center;
@@ -453,27 +505,16 @@ a {
 }
 
 .feed-meta > span:first-child {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
   font-weight: 600;
   color: var(--text);
 }
 
-/* Avatar-cirkel før forfatternavnet */
-.feed-meta > span:first-child {
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* Separator */
 .separator {
   border: none;
   border-top: 1px solid var(--border);
   margin: 0;
 }
 
-/* Sektioner inde i kortet */
 .detail-card > section {
   display: flex;
   flex-direction: column;
@@ -497,7 +538,6 @@ a {
   white-space: pre-wrap;
 }
 
-/* Footer / action-område */
 .detail-actions {
   display: flex;
   justify-content: flex-end;
@@ -510,16 +550,224 @@ a {
   margin: 0;
 }
 
-/* Mobil */
-@media (max-width: 700px) {
-  .detail-card { padding: 28px 22px; }
-  .detail-top { flex-direction: column; gap: 12px; }
-  .detail-top h1 { font-size: 26px; }
+/* ===== PROFILE PAGE ===== */
+.profile-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Profil-hovedkort med banner */
+.profile-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Lilla banner kun øverst på det FØRSTE profilkort */
+.profile-layout > .profile-card:first-child::before {
+  content: "";
+  display: block;
+  height: 110px;
+  background: linear-gradient(135deg, var(--primary), #8d72ff);
+}
+
+/* Indholdet i profilkortet */
+.profile-layout > .profile-card:first-child .profile-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  padding: 0 32px 28px;
+  margin-top: -55px;
+}
+
+.profile-main {
+  display: flex;
+  align-items: flex-end;
+  gap: 22px;
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-main h1 {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 6px 0;
+  color: var(--text);
+}
+
+.profile-main .lead {
+  font-size: 14px;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Avatar */
+.avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 999px;
+  font-size: 42px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--primary), #8d72ff);
+  color: white;
+  border: 5px solid white;
+  box-shadow: 0 8px 24px rgba(109, 74, 255, 0.25);
+  flex-shrink: 0;
+}
+
+/* Brug padding på de almindelige profilkort (uden banner) */
+.profile-layout > .profile-card:not(:first-child) { padding: 28px; }
+
+/* Form-kortet */
+.form-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  padding: 28px;
+}
+
+.form-card .section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+.form-help {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 22px 0;
+}
+
+/* Mine opslag - sektions header */
+.section-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.section-row .section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+/* Empty card */
+.empty-card {
+  background: #fafaff;
+  border: 1px dashed var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  text-align: center;
+}
+
+.empty-card p { margin: 0 0 8px 0; }
+
+/* Post-liste-elementer på profilen */
+.post-list-item {
+  display: block;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: all 0.18s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-list-item:hover {
+  border-color: rgba(109, 74, 255, 0.3);
+  background: #fafaff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(17, 24, 39, 0.08);
+}
+
+.post-list-item .muted-link {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+}
+
+.post-list-item h3 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 8px 0 6px 0;
+}
+
+.post-list-item p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  margin: 8px 0 0 0;
+}
+
+.post-list-item p strong {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 13px;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
-  .layout {
-    grid-template-columns: 1fr;
+  .layout { grid-template-columns: 1fr; }
+
+  .profile-layout > .profile-card:first-child .profile-top {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 24px 24px;
   }
+
+  .field-grid.two { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .detail-card { padding: 28px 22px; }
+  .detail-top { flex-direction: column; gap: 12px; }
+  .detail-top h1 { font-size: 26px; }
+
+  .profile-main { flex-direction: column; align-items: flex-start; }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    font-size: 34px;
+  }
+
+  .profile-main h1 { font-size: 24px; }
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+  transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(239, 68, 68, 0.35);
 }

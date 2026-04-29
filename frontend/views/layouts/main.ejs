@@ -18,18 +18,20 @@
         </a>
         <div class="header-actions">
           <a class="primary-btn" href="/main/post/create">＋ Nyt opslag</a>
-          <a class="icon-btn" href="/main/post/feed">Profil</a>
+          <a class="icon-btn" href="/auth/profile">Profil</a>
         </div>
       </div>
     </header>
 
     <div class="layout">
       <aside class="sidebar">
-        <section>
-          <h2 class="sidebar-title">Navigation</h2>
-          <a class="nav-link active" href="/main/post/feed">Feed</a>
-          <a class="nav-link active" href="/main/groups">Alle grupper</a>
-        </section>
+      <section>
+        <h2 class="sidebar-title">Navigation</h2>
+        <a class="nav-link <%= currentPath.startsWith('/main/post') ? 'active' : '' %>" 
+          href="/main/post/feed">Feed</a>
+        <a class="nav-link <%= currentPath.startsWith('/main/groups') ? 'active' : '' %>" 
+          href="/main/groups">Alle grupper</a>
+      </section>
         
         <section class="grouped-section">
         <%- include("../partials/group-nav", { groups: groups }) %>

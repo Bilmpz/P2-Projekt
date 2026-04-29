@@ -34,6 +34,7 @@ const userSchema = new Schema(
   {
     timestamps: true,
   }
+  
 );
 
 // Hashing af password
@@ -45,6 +46,7 @@ userSchema.pre("save", async function () {
 userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
+
 
 
 const User = mongoose.model("User", userSchema)

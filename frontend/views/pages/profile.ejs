@@ -1,0 +1,89 @@
+<div class="container">
+
+  <section class="profile-layout">
+
+    <!-- Profil-kortet -->
+    <article class="profile-card">
+      <div class="profile-top">
+        <div class="profile-main">
+          <div class="avatar"><%= user.username.charAt(0).toUpperCase() %></div>
+          <div>
+            <h1><%= user.username %></h1>
+            <p class="lead"><%= user.email %></p>
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- Redigér profil -->
+    <article class="form-card" id="edit-profile">
+      <h2 class="section-title">Redigér profil</h2>
+      <p class="form-help">Opdater dine profiloplysninger.</p>
+
+      <form class="stack" method="POST" action="/auth/profile/update">
+        <div class="field-grid two">
+          <div class="field">
+            <label for="profile-name">Brugernavn</label>
+            <input id="profile-name" name="username" type="text"
+                   value="<%= user.username %>" required>
+          </div>
+          <div class="field">
+            <label for="profile-email">AAU e-mail</label>
+            <input id="profile-email" name="email" type="email"
+                   value="<%= user.email %>" required>
+          </div>
+        </div>
+        <div class="field">
+        </div>
+        <div>
+          <button class="primary-btn" type="submit">Gem ændringer</button>
+        </div>
+      </form>
+    </article>
+
+    <!-- Mine opslag -->
+    <article class="profile-card">
+      <div class="section-row">
+        <div>
+          <h2 class="section-title">Mine opslag (<%= posts.length %>)</h2>
+          <p class="lead">Opslag du selv har oprettet.</p>
+        </div>
+      </div>
+
+      <% if (posts.length === 0) { %>
+        <div class="empty-card" style="margin-top:18px;">
+          <p>Du har ikke oprettet nogen opslag endnu.</p>
+          <a class="primary-btn" href="/main/post/create" style="margin-top:12px;">
+            ＋ Opret dit første opslag
+          </a>
+        </div>
+      <% } else { %>
+        <% posts.forEach(post => { %>
+          <%
+            const ageMs = Date.now() - new Date(post.createdAt).getTime();
+            const ageDays = Math.floor(ageMs / (1000 * 60 * 60 * 24));
+            let timeLabel;
+            if (ageDays === 0) timeLabel = "I dag";
+            else if (ageDays === 1) timeLabel = "1 dag siden";
+            else timeLabel = ageDays + " dage siden";
+          %>
+          <a class="post-list-item" href="/main/post/<%= post._id %>"
+             style="display:block; margin-top:18px; text-decoration:none; color:inherit;">
+            <span class="muted-link">
+              <%= post.group ? post.group.name : "Ukendt gruppe" %>
+            </span>
+            <h3 style="margin:10px 0 6px;"><%= post.title %></h3>
+            <div class="feed-meta"><span><%= timeLabel %></span></div>
+            <p><%= post.content %></p>
+            <% if (post.availability) { %>
+              <p><strong>Foretrukne tidspunkter:</strong> <%= post.availability %></p>
+            <% } %>
+          </a>
+        <% }) %>
+      <% } %>
+    </article>
+
+  </section>
+
+</div>
