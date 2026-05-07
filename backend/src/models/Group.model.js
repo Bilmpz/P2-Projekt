@@ -13,11 +13,6 @@ const groupSchema = new Schema(
     location: String,
     department: String,
 
-  // optional: liste af members (denormalisering)
-  /*members: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }]*/
 }, { timestamps: true });
 
 

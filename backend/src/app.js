@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, '../../frontend/public')))
 
 // --- PUBLIC ROUTES (ingen login krævet) --- 
 app.get('/', (req, res) => {
-    res.render("pages/index", { layout: false })
+    res.render("pages/index", { layout: false, registered: req.query.registere, error: req.query.error })
 })
 app.use("/auth", authRoutes)
 

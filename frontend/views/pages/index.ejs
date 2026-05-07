@@ -37,36 +37,76 @@
           <h2>Log ind</h2>
           <p>Brug din AAU-mail for at fortsætte.</p>
         </div>
+      <!-- Når bruger er blevet oprettet-->
+      <% if (registered) { %>
+        <div class="success-message">
+          Bruger oprettet! Du kan nu logge ind.
+        </div>
+      <% } %>
+      <!-- Error hvis bruger ikke fundet -->
+      <% if (error === "invalid-login") { %>
+        <div class="error-message">
+          Forkert email eller password
+        </div>
+      <% } %>
 
-        <form class="stack">
-          <div class="field" id="usernameField">
-            <label for="username">Brugernavn</label>
-            <input id="usernameInput" type="text" placeholder="Dit brugernavn">
-          </div>
+    <% if (error === "email-exists") { %>
+      <div class="error-message">
+        Email findes allerede
+      </div>
+    <% } %>
 
-          <div class="field">
-            <label for="email">AAU e-mail</label>
-            <input id="emailInput" type="email" placeholder="navn@student.aau.dk">
-          </div>
+  <!-- TOGGLE BUTTONS -->
+  <div class="auth-switch">
+    <button id="showLogin" class="switch-btn active">
+      Login
+    </button>
 
-          <div class="field">
-            <label for="password">Adgangskode</label>
-            <input id="passwordInput" type="password" placeholder="Skriv din adgangskode">
-          </div>
+    <button id="showRegister" class="switch-btn">
+      Register
+    </button>
+  </div>
 
-          <div class="login-actions">
-            <label class="checkbox-row" for="remember-me">
-              <input id="remember-me" type="checkbox">
-              <span>Husk mig</span>
-            </label>
-            <a class="muted-link" href="#">Glemt kodeord?</a>
-          </div>
+  <!-- LOGIN FORM -->
+  <form id="loginForm" action="/auth/login" method="POST" class="auth-form">
+    <div class="field">
+      <label>Email</label>
+      <input type="email" name="email" required>
+    </div>
 
-          <p id="error" style="display:none; color:rgb(245, 134, 134);"></p>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" name="password" required>
+    </div>
 
-        <button id="authBtn" type="button" class="primary-btn" onclick="login()">Log ind</button>
-        <button id="registerBtn" type="button" class="secondary-btn" onclick="register()">Opret bruger</button>
-        </form>
+    <button type="submit" class="primary-btn">
+      Login
+    </button>
+  </form>
+
+  <!-- REGISTER FORM -->
+  <form id="registerForm" action="/auth/register" method="POST" class="auth-form hidden">
+    <div class="field">
+      <label>Username</label>
+      <input type="text" name="username" required>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input type="email" name="email" required>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" name="password" required>
+    </div>
+
+    <button type="submit" class="primary-btn">
+      Opret bruger
+    </button>
+  </form>
+
+</div>
     </section>
   </main>
 

@@ -357,3 +357,61 @@ input {
     align-items: flex-start;
   }
 }
+
+.auth-wrapper {
+  max-width: 420px;
+  margin: 80px auto;
+  background: white;
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 14px 35px rgba(16, 24, 40, 0.08);
+}
+
+.auth-switch {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.switch-btn {
+  flex: 1;
+  border: none;
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.switch-btn.active {
+  background: #6d4aff;
+  color: white;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hidden {
+  display: none;
+}
+
+.success-message {
+  background: #e9fbf0;
+  color: #157347;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}

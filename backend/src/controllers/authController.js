@@ -8,12 +8,13 @@ const registerUser = async (req, res) => {
         const { username, email, password } = req.body
 
         if (!username || !email || !password) {
-            return res.status(400).json({ message: "All fields are important!" })
+            return res.status(400).send("Udfyld alle felter")
         }
 
         const existing = await User.findOne({ email: email.toLowerCase() })
         if (existing) {
-            return res.status(400).json({ message: "user already exists" })
+            return res.redirect("/?error=email-exists");
+            //return res.status(400).send("Bruger findes allerede")
         }
 
         const user = await User.create({
@@ -22,9 +23,9 @@ const registerUser = async (req, res) => {
             password,
         })
         console.log(user)
-        return res.status(201).json({ message: "Bruger oprettet" })
+        return res.redirect("/?registered=true");
     } catch (error) {
-        res.status(500).json({ message: "Internal server error", error: error.message })
+        return res.status(500).send(error.message);
     }
 }
 
@@ -34,17 +35,19 @@ const loginUser = async (req, res) => {
         const { email, password } = req.body
 
         if (!email || !password) {
-            return res.status(400).json({ message: "Udfyld email og password" })
+            return res.status(400).send("Udfyld email og password");
         }
 
         const user = await User.findOne({ email: email.toLowerCase() })
 
         if (!user) {
-            return res.status(400).json({ message: "Forkert email eller password" })
+            return res.redirect("/?error=invalid-login");
         }
 
         const isMatch = await user.comparePassword(password);
-        if (!isMatch) return res.status(400).json({ message: "invalid credentials" });
+        if (!isMatch){
+            return res.redirect("/?error=invalid-login");    
+        } 
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '24h' })
         return res.status(200).cookie("token", token, {
@@ -52,10 +55,10 @@ const loginUser = async (req, res) => {
             secure: false,
             sameSite: "lax",
             maxAge: 24 * 60 * 60 * 1000
-        }).json({ message: "Login successful" });
+        }).redirect("/main/post/feed");
 
     } catch (error) {
-        res.status(500).json({ message: "internal server error", error: error.message })
+        return res.status(500).send(error.message);
     }
 }
 

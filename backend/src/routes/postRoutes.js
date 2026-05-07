@@ -17,6 +17,6 @@ router.post("/create", createPost);
 router.get("/group/:groupId", getGroupPosts);
 router.get("/:postId", getPostById);
 router.post("/:postId/delete", deletePost);
-router.put("/:postId", updatePost);
+router.post("/:postId/update", updatePost);
 
 export default router;
