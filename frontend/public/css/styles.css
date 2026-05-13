@@ -415,3 +415,10 @@ input {
   margin-bottom: 18px;
   font-weight: 600;
 }
+
+input:invalid.registerInput {
+  border: 2px dashed red;
+}
+input:invalid:focus.registerInput {
+  background-image: linear-gradient(pink, lightgreen);
+}
