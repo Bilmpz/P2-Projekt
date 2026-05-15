@@ -120,86 +120,7 @@ P2-Projekt/
 └── .env                            # Lokale env-variabler (ikke committet)
 ```
 
----
 
-## Kom i gang
-
-### Forudsætninger
-
-- Node.js 18 eller nyere
-- En MongoDB Atlas-konto med et cluster sat op
-- Git
-
-### Installation
-
-Klon repoet og installer dependencies:
-
-```bash
-git clone https://github.com/Bilmpz/P2-Projekt.git
-cd P2-Projekt
-npm install
-```
-
----
-
-## Konfiguration
-
-### 1. Lav en `.env`-fil i projektets rod
-
-```env
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.xxxxxxx.mongodb.net/
-PORT=3000
-JWT_SECRET="vælg_en_lang_tilfældig_streng"
-```
-
-### 2. ⚠️ MongoDB Atlas — IP whitelist
-
-Det her er den fejl alle løber ind i først. MongoDB Atlas blokerer som standard alle indkommende forbindelser. Hvis du ikke whitelister din IP, vil serveren ikke starte og du får denne fejl:
-
-```
-MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster.
-```
-
-**Sådan fikser du det:**
-
-1. Log ind på [cloud.mongodb.com](https://cloud.mongodb.com)
-2. Vælg dit cluster → **Network Access** i venstre menu
-3. Klik **Add IP Address**
-4. Vælg enten:
-   - **Add Current IP Address** — kun din nuværende IP
-   - **Allow Access from Anywhere** (`0.0.0.0/0`) — anbefales til udvikling, så hele gruppen kan tilgå databasen fra forskellige netværk
-5. Vent 1-2 minutter på at ændringen slår igennem
-
-> **⚠️ Sikkerhed:** `0.0.0.0/0` er **ikke** sikkert i produktion. Det er kun OK fordi det her er et skoleprojekt med dummy-data.
-
----
-
-## Kørsel
-
-### Start serveren i dev-mode (med hot reload)
-
-```bash
-npm run dev
-```
-
-Serveren kører nu på `http://localhost:3000`. Du burde se:
-
-```
-MongoDB connected !!!
-server is running on port: 3000
-```
-
-### Seed databasen med fag/grupper
-
-Hvis databasen er tom, kan du seede den med dummy-grupper:
-
-```bash
-npm run seed
-```
-
----
-
-## Routes-oversigt
 
 ### Auth
 
@@ -266,28 +187,9 @@ npm run seed
 | content      | String   |                            |
 | availability | String   | Foretrukne læsetidspunkter |
 
-### GroupMembership
-Mange-til-mange-relation mellem User og Group — bestemmer hvilke grupper en bruger er medlem af.
 
-### Message
-Beskeder sendt mellem to brugere.
 
----
+## Lavet af 
+Birk Toppenberg Lazar, Hjalte Zacharias Matthiesen, Mohammed Benjamin Tufail Bhatti, Oliver Hjort Backe Løbel, Uni Gilstón, Jakob Pedersen & Marcus Elkjær
 
-## Kendte issues
 
-- **Beskeder-funktionen er ikke fuldt implementeret i frontend** — backend-routes virker, men UI'et er kun delvist.
-- **Ingen fejlbeskeder til brugeren** ved login/register — fejl returneres som JSON, men frontend håndterer dem ikke pænt endnu.
-- **CORS** er hardcoded til `http://127.0.0.1:5500` (Live Server). Det skal ændres når frontend serveres fra Express selv.
-
----
-
-## Forfattere
-
-P2-projektgruppe, Aalborg Universitet København, 2. semester Software 2025/26.
-
----
-
-## Licens
-
-ISC — internt skoleprojekt.
