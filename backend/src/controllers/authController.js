@@ -11,10 +11,15 @@ const registerUser = async (req, res) => {
             return res.status(400).send("Udfyld alle felter")
         }
 
-        const existing = await User.findOne({ email: email.toLowerCase() })
-        if (existing) {
+        const existingEmail = await User.findOne({ email: email.toLowerCase() })
+        if (existingEmail) {
             return res.redirect("/?error=email-exists");
             //return res.status(400).send("Bruger findes allerede")
+        }
+
+        const existingUsername = await User.findOne({username: username.toLowerCase()});
+        if (existingUsername) {
+            return res.redirect("/?error=username-exists");
         }
 
         const user = await User.create({

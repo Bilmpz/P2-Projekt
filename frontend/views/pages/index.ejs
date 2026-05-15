@@ -49,10 +49,16 @@
           Forkert email eller password
         </div>
       <% } %>
-
+      <!-- Error hvis email allerede findes -->
     <% if (error === "email-exists") { %>
       <div class="error-message">
         Email findes allerede
+      </div>
+    <% } %>
+        <!-- Error hvis username allerede findes -->
+        <% if (error === "username-exists") { %>
+      <div class="error-message">
+        Username findes allerede
       </div>
     <% } %>
 
@@ -88,17 +94,17 @@
   <form id="registerForm" action="/auth/register" method="POST" class="auth-form hidden">
     <div class="field">
       <label>Username</label>
-      <input class ="registerInput"  type="text" name="username" minlength="3" maxlength="30" required>
+      <input class ="registerInput"  type="text" name="username" minlength="3" maxlength="30" required oninvalid="this.setCustomValidity('Username skal indeholde mindst 3 karaktere')" oninput="this.setCustomValidity('')">
     </div>
 
     <div class="field">
       <label>Email</label>
-      <input class ="registerInput" type="email" name="email" required>
+      <input class ="registerInput" type="email" name="email" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" oninvalid="this.setCustomValidity('Indtast en gyldig email')" oninput="this.setCustomValidity('')">
     </div>
 
     <div class="field">
       <label>Password</label>
-      <input class ="registerInput" type="password" name="password" required minlength="6" maxlength="128">
+      <input class ="registerInput" type="password" name="password" required minlength="6" maxlength="30">
     </div>
 
     <button type="submit" class="primary-btn">
