@@ -4,22 +4,7 @@ Et P2-projekt udviklet på Aalborg Universitet København. AAU Study Buddy er en
 
 ---
 
-## Indholdsfortegnelse
-
-- [Om projektet](#om-projektet)
-- [Features](#features)
-- [Tech stack](#tech-stack)
-- [Projektstruktur](#projektstruktur)
-- [Kom i gang](#kom-i-gang)
-- [Konfiguration](#konfiguration)
-- [Kørsel](#kørsel)
-- [Routes-oversigt](#routes-oversigt)
-- [Datamodeller](#datamodeller)
-- [Kendte issues](#kendte-issues)
-
----
-
-## Om projektet
+## Projektet
 
 AAU Study Buddy løser et velkendt problem på universitetet: det kan være svært at finde nogen at læse op med — især på store årgange, eller når man er ny. Platformen lader brugere:
 
