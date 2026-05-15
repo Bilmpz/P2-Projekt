@@ -21,7 +21,7 @@
       <h2 class="section-title">Redigér profil</h2>
       <p class="form-help">Opdater dine profiloplysninger.</p>
 
-      <form class="stack" method="POST" action="/auth/profile/update">
+      <form class="stack" method="POST" action="/auth/profile/update" onsubmit="return confirm('Er du sikker på, at du vil opdatere din profil information?');">
         <div class="field-grid two">
           <div class="field">
             <label for="profile-name">Brugernavn</label>

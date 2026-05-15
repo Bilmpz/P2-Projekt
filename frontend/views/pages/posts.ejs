@@ -15,7 +15,7 @@
     const authorName=post.user ? post.user.username : "Ukendt bruger" ; 
     %>
         <% if (isOwn) { %>
-            <form action="/main/post/<%= post._id %>/update" method="POST" class="detail-card edit-post-card">
+            <form action="/main/post/<%= post._id %>/update" method="POST"  class="detail-card edit-post-card" onsubmit="return confirm('Er du sikker på, at du vil opdatere din post?');">
 
                 <div class="detail-top">
                     <a class="muted-link" href="/main/post/group/<%= post.group._id %>">
